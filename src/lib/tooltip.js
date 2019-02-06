@@ -12,7 +12,7 @@ const DEFAULT_OPTIONS = {
 	title: '',
 	template:
 				'<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
-	trigger: 'hover focus',
+	trigger: 'hover focus scroll',
 	offset: 0,
 }
 
@@ -185,7 +185,7 @@ export default class Tooltip {
 			? this.options.trigger
 				.split(' ')
 				.filter(
-					trigger => ['click', 'hover', 'focus'].indexOf(trigger) !== -1
+					trigger => ['click', 'hover', 'focus', 'scroll'].indexOf(trigger) !== -1
 				)
 			: []
 		this._isDisposed = false
@@ -222,6 +222,7 @@ export default class Tooltip {
 		if (this.options.autoHide && this.options.trigger.indexOf('hover') !== -1) {
 			tooltipNode.addEventListener('mouseenter', this.hide)
 			tooltipNode.addEventListener('click', this.hide)
+			tooltipNode.addEventListener('scroll', this.hide)
 		}
 
 		// return the generated tooltip node
@@ -419,6 +420,7 @@ export default class Tooltip {
 				if (this._tooltipNode) {
 					this._tooltipNode.removeEventListener('mouseenter', this.hide)
 					this._tooltipNode.removeEventListener('click', this.hide)
+					this._tooltipNode.removeEventListener('scroll', this.hide)
 					// Don't remove popper instance, just the HTML element
 					this._tooltipNode.parentNode.removeChild(this._tooltipNode)
 					this._tooltipNode = null
@@ -445,6 +447,7 @@ export default class Tooltip {
 
 			this._tooltipNode.removeEventListener('mouseenter', this.hide)
 			this._tooltipNode.removeEventListener('click', this.hide)
+			this._tooltipNode.removeEventListener('scroll', this.hide)
 
 			// destroy instance
 			this.popperInstance.destroy()
@@ -502,6 +505,10 @@ export default class Tooltip {
 				directEvents.push('click')
 				oppositeEvents.push('click')
 				break
+			case 'scroll':
+				directEvents.push('scroll')
+				oppositeEvents.push('scroll')
+				break
 			}
 		})
 
@@ -558,7 +565,7 @@ export default class Tooltip {
 
 			// if we are hiding because of a mouseleave, we must check that the new
 			// reference isn't the tooltip, because in this case we don't want to hide it
-			if (evt.type === 'mouseleave') {
+			if (evt.type === 'mouseleave' || evt.type === 'scroll') {
 				const isSet = this._setTooltipNodeEvent(evt, reference, delay, options)
 
 				// if we set the new event, don't hide the tooltip yet
