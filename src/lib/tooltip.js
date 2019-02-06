@@ -78,7 +78,7 @@ export default class Tooltip {
 	 * @method Tooltip#show
 	 * @memberof Tooltip
 	 */
-	show = () => {
+	show () {
 		this._show(this.reference, this.options)
 	}
 
@@ -87,7 +87,7 @@ export default class Tooltip {
 	 * @method Tooltip#hide
 	 * @memberof Tooltip
 	 */
-	hide = () => {
+	hide () {
 		this._hide()
 	}
 
@@ -96,7 +96,7 @@ export default class Tooltip {
 	 * @method Tooltip#dispose
 	 * @memberof Tooltip
 	 */
-	dispose = () => {
+	dispose () {
 		this._dispose()
 	}
 
@@ -105,13 +105,13 @@ export default class Tooltip {
 	 * @method Tooltip#toggle
 	 * @memberof Tooltip
 	 */
-	toggle = () => {
+	toggle () {
 		if (this._isOpen) {
 			return this.hide()
 		} else {
 			return this.show()
 		}
-	};
+	}
 
 	setClasses (classes) {
 		this._classes = classes
@@ -177,7 +177,7 @@ export default class Tooltip {
 	// Private methods
 	//
 
-	_events = [];
+	_events = []
 
 	_init () {
 		// get events list
@@ -572,30 +572,30 @@ export default class Tooltip {
 		}, computedDelay)
 	}
 
-		_setTooltipNodeEvent = (evt, reference, delay, options) => {
-			const relatedreference = evt.relatedreference || evt.toElement || evt.relatedTarget
+	_setTooltipNodeEvent = (evt, reference, delay, options) => {
+		const relatedreference = evt.relatedreference || evt.toElement || evt.relatedTarget
 
-			const callback = evt2 => {
-				const relatedreference2 = evt2.relatedreference || evt2.toElement || evt2.relatedTarget
+		const callback = evt2 => {
+			const relatedreference2 = evt2.relatedreference || evt2.toElement || evt2.relatedTarget
 
-				// Remove event listener after call
-				this._tooltipNode.removeEventListener(evt.type, callback)
+			// Remove event listener after call
+			this._tooltipNode.removeEventListener(evt.type, callback)
 
-				// If the new reference is not the reference element
-				if (!reference.contains(relatedreference2)) {
-					// Schedule to hide tooltip
-					this._scheduleHide(reference, options.delay, options, evt2)
-				}
+			// If the new reference is not the reference element
+			if (!reference.contains(relatedreference2)) {
+				// Schedule to hide tooltip
+				this._scheduleHide(reference, options.delay, options, evt2)
 			}
+		}
 
-			if (this._tooltipNode.contains(relatedreference)) {
-				// listen to mouseleave on the tooltip element to be able to hide the tooltip
-				this._tooltipNode.addEventListener(evt.type, callback)
-				return true
-			}
+		if (this._tooltipNode.contains(relatedreference)) {
+			// listen to mouseleave on the tooltip element to be able to hide the tooltip
+			this._tooltipNode.addEventListener(evt.type, callback)
+			return true
+		}
 
-			return false
-		};
+		return false
+	}
 }
 
 // Hide tooltips on touch devices

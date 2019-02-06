@@ -18,6 +18,24 @@ Easy tooltips, popovers and dropdown with <a href="https://github.com/FezVrasta/
   </a>
 </p>
 
+## Sponsors
+
+### Silver
+
+<p align="center">
+  <a href="https://vueschool.io/" target="_blank">
+    <img src="https://vueschool.io/img/logo/vueschool_logo_multicolor.svg" alt="VueSchool logo" width="200px">
+  </a>
+</p>
+
+### Bronze
+
+<p align="center">
+  <a href="https://vuetifyjs.com" target="_blank">
+    <img src="https://cdn.discordapp.com/attachments/537832759985700914/537832771691872267/Horizontal_Logo_-_Dark.png" width="100">
+  </a>
+</p>
+
 <br>
 <br>
 <br>
@@ -755,4 +773,4 @@ Bellow are some examples of style you need. [Here](https://github.com/Akryum/v-t
 
 ---
 
-LICENCE ISC - Created by Guillaume CHAU (@Akryum)
+LICENCE MIT - Created by Guillaume CHAU (@Akryum)
